@@ -5,7 +5,7 @@ local obj={}
 obj.__index = obj
 
 -- metadata for all spoons
-obj.name = "editWithEmacs"
+obj.name = "EditWithEmacs"
 obj.version = "0.2"
 obj.author = "Daniel German <dmg@uvic.ca> and  Jeremy Friesen <emacs@jeremyfriesen.com>"
 obj.homepage = "https://github.com/dmgerman/editWithEmacs.spoon"
@@ -100,9 +100,8 @@ function obj:bindHotkeys(mapping)
 end
 
 function obj:endEditing(everything)
-   -- the text is in the clipboard
-   -- enable the original window and see what happens
-   -- this is usually run by emacs using hs
+   -- The text is in the clipboard enable the original window and see
+   -- what happens. This is usually run by Emacs using hs.
 
    print(self.emacsAppName .. " is sending back the text")
 
@@ -121,6 +120,6 @@ function obj:endEditing(everything)
 
 end
 
-print("Finished loading editWithEmacs.spoon" )
+print("Finished loading EditWithEmacs.spoon" )
 
 return obj
