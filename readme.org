@@ -1,10 +1,9 @@
 #+STARTUP: showall
-#+TITLE: Edit with emacs Everywhere
+#+TITLE: Edit with Emacs everywhere
 #+OPTIONS: ^:nil
 
 * Introduction
-
-This module allows editing with Emacs anywhere in OS X.
+This module allows editing with Emacs anywhere in macOS.
 
 See this demo: [[https://youtu.be/jYUKYpXL6rI]]
 
@@ -13,18 +12,19 @@ In any text field in any application, one can summon Emacs to edit text:
 1. User is in a non-Emacs application, and presses the bound keys (see below).
 2. Emacs opens a buffer for editing.
 3. User edits buffer via Emacs.
-4. User presses =C-c C-c=, sending the Emacs buffer back to the originating application window.
+4. User presses =C-c C-c=, sending the Emacs buffer back to the
+   originating application window.
 
 * Installation
-
 ** Hammerspoon
+Install Hammerspoon, either from [[https://hammerspoon.org/#how-do-i-install-it][their instructions]] or via Homebrew
+(e.g., =brew install hammerspoon=).
 
-Install Hammerspoon, either from [their instructions](https://hammerspoon.org/#how-do-i-install-it) or via Homebrew (e.g., `brew install hammerspoon`).
-
-Place this repository’s folder inside the =~/.hammerspoon/Spoons= directory such that you have the following:
+Place this repository’s folder inside the =~/.hammerspoon/Spoons=
+directory such that you have the following:
 
 #+begin_src sh
- ~/.hammerspoon/Spoons/editWithEmacs.spoon
+ ~/.hammerspoon/Spoons/EditWithEmacs.spoon
 #+end_src
 
 Note, the =.spoon= extension is important.
@@ -40,38 +40,43 @@ if spoon.editWithEmacs then
    local bindings = {
       edit_selection =  { {"alt"}, "1"},
       edit_all       = { {"alt"}, "2"}
-   }   
+   }
    spoon.editWithEmacs:bindHotkeys(bindings)
 end
-
 #+end_src
 
 ** Emacs
-
 Load the =hammerspoon.el= file in Emacs.
 
 #+begin_src emacs-lisp :lexical no
-  (load "~/.hammerspoon/Spoons/editWithEmacs.spoon/hammerspoon.el")
+  (load "~/.hammerspoon/Spoons/EditWithEmacs.spoon/hammerspoon.el")
 #+end_src
 
 * Testing installation
-
-To test if you Hammerspoon works from Emacs, call =hammerspoon-test= (e.g., =M-x hammerspoon-test=).
+To test if you Hammerspoon works from Emacs, call =hammerspoon-test=
+(e.g., =M-x hammerspoon-test=).
 
 * How to use
+With the above keybindings, when you press =Cmd= + =Alt= + =Ctrl= + =e=,
+Hammerspoon will copy the content of the current application’s focus,
+open an Emacs buffer, and paste those contents into the buffer. You
+then edit the that Emacs buffer and press =C-c C-c= to send that back to
+the originating window.
 
-With the above keybindings, when you press =Cmd= + =Alt= + =Ctrl= + =e=, Hammerspoon will copy the content of the current application’s focus, open an Emacs buffer, and paste those contents into the buffer.  You then edit the that Emacs buffer and press =C-c C-c= to send that back to the originating window.
-
-If you press =Shift= + =Cmd= + =Alt= + =Ctrl= + =e=, Hammerspoon cuts the current selected text, and pastes that into the buffer.  When you finish editing, Hammerspoon will paste the content of the buffer; which will replace the selected text.
+If you press =Shift= + =Cmd= + =Alt= + =Ctrl= + =e=, Hammerspoon cuts the
+current selected text, and pastes that into the buffer. When you
+finish editing, Hammerspoon will paste the content of the buffer;
+which will replace the selected text.
 
 * Limitations
-
-- This method is non-reentrant. This means you can only edit one field at a time. You do not need to send the text back to the text-field.
+- This method is non-reentrant. This means you can only edit one field
+  at a time. You do not need to send the text back to the text-field.
   You can use edit-with-emacs again without any undesirable effect.
-- It is currently sending commands directly to emacs via the keyboard. Thus, emacs should be ready to accept commands
-- If something goes wrong and the text does not appear, you can retrieve it from emacs. Switch to the _hs_edit buffer and you will see the text you were editing.
-  This buffer will be reused
+- It is currently sending commands directly to emacs via the keyboard.
+  Thus, emacs should be ready to accept commands
+- If something goes wrong and the text does not appear, you can
+  retrieve it from emacs. Switch to the _hs_edit buffer and you will
+  see the text you were editing. This buffer will be reused
 
 * Bugs/fixes?
-
 - Please open an issue/pull-request
