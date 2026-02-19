@@ -75,6 +75,7 @@
 
 (defun hammerspoon-alert (message)
   "Show given MESSAGE via Hammerspoon's alert system."
+  (interactive "Message: ")
   (hammerspoon-do (concat "hs.alert.show('" message "', 1)")))
 
 
@@ -91,7 +92,8 @@ If you see a message, Hammerspoon is working correctly."
   (mark-whole-buffer)
   (simpleclip-copy (point-min) (point-max))
   (hammerspoon-do "spoon.EditWithEmacs:endEditing(False)")
-  (previous-buffer))
+  ;; (previous-buffer)
+  )
 
 
 (defun hammerspoon-edit-begin ()
